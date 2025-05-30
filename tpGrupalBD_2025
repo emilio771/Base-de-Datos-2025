@@ -1,5 +1,6 @@
--- Tablas independientes
-CREATE TABLE PERSONA (
+     --- Tablas ---
+
+CREATE TABLE persona (
     nroDoc VARCHAR(20) NOT NULL,
     tipoDoc VARCHAR(5) NOT NULL,
     email VARCHAR(100),
@@ -10,19 +11,18 @@ CREATE TABLE PERSONA (
     PRIMARY KEY (nroDoc, tipoDoc)
 );
 
-CREATE TABLE LIBRO (
+CREATE TABLE libro (
     ISBN VARCHAR(20) PRIMARY KEY,
     portada VARCHAR(255),
     nombreLibro VARCHAR(100)
 );
 
-CREATE TABLE TEMA (
+CREATE TABLE tema (
     codigoTema VARCHAR(10) PRIMARY KEY,
     nombreTema VARCHAR(50)
 );
 
--- Tablas dependientes
-CREATE TABLE EDICION (
+CREATE TABLE edicion (
     idEdicion VARCHAR(10) PRIMARY KEY,
     fechaInicio DATE,
     fechaCierre DATE,
@@ -34,7 +34,7 @@ CREATE TABLE EDICION (
     FOREIGN KEY (codigoTemaApertura) REFERENCES TEMA(codigoTema)
 );
 
-CREATE TABLE LECTOR (
+CREATE TABLE lector (
     nroDocLector VARCHAR(20) NOT NULL,
     tipoDocLector VARCHAR(5) NOT NULL,
     actividad VARCHAR(50),
@@ -43,7 +43,7 @@ CREATE TABLE LECTOR (
         REFERENCES PERSONA(nroDoc, tipoDoc)
 );
 
-CREATE TABLE AUTOR (
+CREATE TABLE autor (
     nroDocAutor VARCHAR(20) NOT NULL,
     tipoDocAutor VARCHAR(5) NOT NULL,
     nacionalidad VARCHAR(30),
@@ -52,7 +52,7 @@ CREATE TABLE AUTOR (
         REFERENCES PERSONA(nroDoc, tipoDoc)
 );
 
-CREATE TABLE EJEMPLAR (
+CREATE TABLE ejemplar (
     nroCopia VARCHAR(10) NOT NULL,
     ISBN VARCHAR(20) NOT NULL,
     nroMesaExpone VARCHAR(10),
@@ -60,7 +60,7 @@ CREATE TABLE EJEMPLAR (
     FOREIGN KEY (ISBN) REFERENCES LIBRO(ISBN)
 );
 
-CREATE TABLE LECTURA (
+CREATE TABLE lectura (
     idLectura VARCHAR(10) PRIMARY KEY,
     fechaLectura DATE,
     ISBN VARCHAR(20) NOT NULL,
@@ -70,7 +70,7 @@ CREATE TABLE LECTURA (
 );
 
 -- Tablas de relaciones
-CREATE TABLE REALIZA (
+CREATE TABLE realiza (
     nroDocLector VARCHAR(20) NOT NULL,
     tipoDocLector VARCHAR(5) NOT NULL,
     idLectura VARCHAR(10) NOT NULL,
@@ -80,14 +80,14 @@ CREATE TABLE REALIZA (
     FOREIGN KEY (idLectura) REFERENCES LECTURA(idLectura)
 );
 
-CREATE TABLE PERTENECE (
+CREATE TABLE pertenece (
     idLectura VARCHAR(10) PRIMARY KEY,
     idEdicion VARCHAR(10) NOT NULL,
     FOREIGN KEY (idLectura) REFERENCES LECTURA(idLectura),
     FOREIGN KEY (idEdicion) REFERENCES EDICION(idEdicion)
 );
 
-CREATE TABLE EXPONE (
+CREATE TABLE expone (
     idEdicion VARCHAR(10) NOT NULL,
     codigoTema VARCHAR(10) NOT NULL,
     PRIMARY KEY (idEdicion, codigoTema),
@@ -95,7 +95,7 @@ CREATE TABLE EXPONE (
     FOREIGN KEY (codigoTema) REFERENCES TEMA(codigoTema)
 );
 
-CREATE TABLE PREFIERE (
+CREATE TABLE prefiere (
     motivo TEXT,
     ISBN VARCHAR(20) NOT NULL,
     nroDocLector VARCHAR(20) NOT NULL,
