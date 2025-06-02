@@ -2,7 +2,7 @@
 
 CREATE TABLE persona (
     nroDoc VARCHAR(20) NOT NULL,
-    tipoDoc VARCHAR(5) NOT NULL,
+    tipoDoc VARCHAR(15) NOT NULL,
     email VARCHAR(100),
     fechaNac DATE,
     telefono VARCHAR(20),
