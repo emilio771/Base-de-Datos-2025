@@ -3,11 +3,11 @@
 CREATE TABLE persona (
     nroDoc VARCHAR(20) NOT NULL,
     tipoDoc VARCHAR(15) NOT NULL,
-    email VARCHAR(100),
-    fechaNac DATE,
-    telefono VARCHAR(20),
-    apellido VARCHAR(50),
-    nombre VARCHAR(50),
+    email VARCHAR(100) NOT NULL,
+    fechaNac DATE NOT NULL,
+    telefono VARCHAR(20) NOT NULL,
+    apellido VARCHAR(50) NOT NULL,
+    nombre VARCHAR(50) NOT NULL,
     PRIMARY KEY (nroDoc, tipoDoc)
 );
 
